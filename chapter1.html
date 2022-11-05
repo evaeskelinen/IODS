@@ -358,16 +358,52 @@ display: none;
 GitHub repository here. This is an R Markdown (.Rmd) file so you should
 use R Markdown syntax.</em></p>
 <pre class="r"><code># This is a so-called &quot;R chunk&quot; where you can write R code.
+# Please ignore the following notes, they are here so I can access them easily. The part &quot;text continues here will contain the required excercise.  
 # Base notes: remember that when mean(mydata$var1) the $ is separating which variable you are computing.
 # To assign value use X &lt;- YZ where X is the object YZ the value assigned to it.
 # seq() creates sequence of numbers (+1 by default) between the two arguments you pass. You can also assign the result of the sequence into an object eg. example_sequence &lt;- seq(15,30)
 # If you save the results of a function in an object, it is not printed, if you run function without assignment (&lt;-) it is printed but not saved
 # &lt;- and =, 
 # object, function, input, argument: objetc= input and output of function, 
-
+# %&lt;% pipe: with the pipe we can rewrite this: mean(data$var1) to library(tidyverse) mydata$var1 %&lt;% mean() which should give ## [1] 2.5, keyboard shortcut CTRL+Shift+M
+# lm() function, . sends the data to the second argument
+# recap: $ selects column, &lt;- assigns values or result to a variable, pipe, send data into a function.
+# &gt;, &lt;, &gt;=, &lt;= comparison tools, most commonly inside filter() function
+# to write a vertical bar | press alt + 7, | means &#39;or&#39;, &amp; means &#39;and&#39;
+# combine function: c()
+# %in% and c()
+# Filtering for missing values (NAs) needs special care. eg. mydata %&gt;% filter(is.na(var2)) or for rows where var2 is not missing mydata %&gt;% filter(!is.na(var2)) ! means not
+# excluding rows: &quot;not equals&quot; (!=) to keep missing values use | operator and the is.na() function.
+# dividing columns: name of dataset$column wanted to change /2 if wanted division by 2 eg. typesdata$measurement/2
+# mutate() = incorporates the change into the column, mutate () can also be used to create a new column with a singel constant value: can be used to calculate a difference for each existing dates
+#CONTINUE FROM 2.9 CONDITIONAL CALCULATIONS
 date()</code></pre>
-<pre><code>## [1] &quot;Fri Nov  4 15:16:21 2022&quot;</code></pre>
-<p>The text continues here.</p>
+<pre><code>## [1] &quot;Sat Nov  5 15:42:18 2022&quot;</code></pre>
+</div>
+<div id="so-far-it-has-been-an-adventure-learning-all-this." class="section level1">
+<h1>So far it has been an adventure learning all this.</h1>
+</div>
+<div id="i-am-yet-to-be-sure-if-i-have-understood-clearly-everything-and-will-admit-needing-my-notes-above-to-remember-all-the-commands." class="section level1">
+<h1>I am yet to be sure if I have understood clearly everything and will
+admit needing my notes (above) to remember all the commands.</h1>
+</div>
+<div id="very-interesting-though.-i-expect-to-learn-how-to-use-r-and-rstudio-as-well-as-github-to-an-extent-where-it-will-be-useful-for-my-studies." class="section level1">
+<h1>Very interesting though. I expect to learn how to use R and Rstudio
+as well as Github to an extent where it will be useful for my
+studies.</h1>
+</div>
+<div id="this-course-was-one-of-the-suggested-courses-for-the-contemporary-societies-method-courses." class="section level1">
+<h1>This course was one of the suggested courses for the Contemporary
+Societies method courses.</h1>
+</div>
+<div id="the-r-for-health-data-science-and-the-exercise-set-1-gave-a-good-introduction-to-the-r-tools-while-i-also-feel-like-i-will-need-much-more-work-with-r-to-fully-understand-what-i-am-doing-and-to-remember-all-the-functions-and-tools-introduced." class="section level1">
+<h1>The R for Health Data Science and the Exercise Set 1 gave a good
+introduction to the R tools while I also feel like I will need much more
+work with R to fully understand what I am doing and to remember all the
+functions and tools introduced.</h1>
+</div>
+<div id="httpsgithub.comevaeskelineniods-project.git" class="section level1">
+<h1><a href="https://github.com/evaeskelinen/IODS-project.git" class="uri">https://github.com/evaeskelinen/IODS-project.git</a></h1>
 </div>
 
 
