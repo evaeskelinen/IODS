@@ -22,7 +22,9 @@
 # excluding rows: "not equals" (!=) to keep missing values use | operator and the is.na() function.
 # dividing columns: name of dataset$column wanted to change /2 if wanted division by 2 eg. typesdata$measurement/2
 # mutate() = incorporates the change into the column, mutate () can also be used to create a new column with a singel constant value: can be used to calculate a difference for each existing dates
-#
+# if_else(), paste(), 
+#joining multiple datasets
+# group summarize and mutate, pivor_wider() and pivot_longer() as well as select and arrange
 date()
 
 ```
