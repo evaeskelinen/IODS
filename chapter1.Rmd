@@ -27,10 +27,10 @@ date()
 
 ```
 
-# So far it has been an adventure learning all this. 
-# I am yet to be sure if I have understood clearly everything and will admit needing my notes (above) to remember all the commands. 
-# Very interesting though. I expect to learn how to use R and Rstudio as well as Github to an extent where it will be useful for my studies.
-# This course was one of the suggested courses for the Contemporary Societies method courses. 
-# The R for Health Data Science and the Exercise Set 1 gave a good introduction to the R tools while I also feel like I will need much more work with R to fully understand what I am doing and to remember all the functions and tools introduced.
+So far it has been an adventure learning all this. 
+I am yet to be sure if I have understood clearly everything and will admit needing my notes (above) to remember all the commands. 
+Very interesting though. I expect to learn how to use R and Rstudio as well as Github to an extent where it will be useful for my studies.
+This course was one of the suggested courses for the Contemporary Societies method courses. 
+The R for Health Data Science and the Exercise Set 1 gave a good introduction to the R tools while I also feel like I will need much more work with R to fully understand what I am doing and to remember all the functions and tools introduced.
 # https://github.com/evaeskelinen/IODS-project.git
 
