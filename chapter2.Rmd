@@ -1,12 +1,13 @@
 # Regression and model validation
 
-In this section the walk through of the Exercise sheet 2 will be given. 
+In this section the walk through of the Exercise sheet 2 will be given as well as the actual Assignment 2. 
 
 - The work sheet has been a struggle, first to open on R Studio and then to complete the exercises. 
 - All learnt the previous week has been forgotten. Or so it seems.
 - Some key elements need to be relearned because this is a real struggle and half the time I have no idea where I'm going wrong or what I am doing.
 
 ```{r}
+# You can skip this part, this is just notes on the Excercise". 
 # Read the data into R studio. Use lrn14 <- read.table("website", sep="\t", header=TRUE), use 'dim()' to look at dimension, 'str()' to look at structure
 #2.2 Scaling variables 
 #Use the '#' to write intended action then on the next row add the command with no #, eg. c(1,2,3,4,5) /2 if you want to divide each number in a vector, to create the new column with the data achieved, use lrn14$attitude <- lrn14$Attitude / 10 where 'lrn14$attitude' is the new wanted column and '<- lrn14$Attitude / 10' is the data wanted in it.
@@ -54,4 +55,85 @@ date()
 
 So I've been going trough the Exercise2 sheet and so far have learned nothing...my own fault I assume. I understand what's going on when I see the commands used but cannot duplicate the formula/function by myself with just instructions. 
 A very useful website so far: https://www.rstudio.com/resources/cheatsheets/
+
+The following is the process used to do the Assignment and some analysis of it.
+
+1. Reading the data into R Studio
+lrn <- read.table("https://www.mv.helsinki.fi/home/kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
+2. Installing possible libraries that might be used
+- As I wasn't sure which ones would be necessary, all 4 were recalled from the library for use. Out of these mainly dplyrt and tidyverse were used.
+
+>library(GGally)
+>library(ggplot2)
+>library(dplyr)
+>library(tidyverse)
+
+3. Combining questions of the data: Deep, surface and strategic questions
+- For this section the data was cleaned up for later use. Data relater to deep questions were combined to be found under the label 'deep_questions' and the same process was done for surface and strategic questions with the function shown below. 'deep_questions was to be the assigned name for the combination of variables selected done by the <- assign function followed by the c() function including the selected columns.
+
+> deep_questions <- c("D03", "D11", "D19", "D27", "D07", "D14", "D22", "D30","D06",  "D15", "D23", "D31")
+> surface_questions <- c("SU02","SU10","SU18","SU26", "SU05","SU13","SU21","SU29","SU08","SU16","SU24","SU32")
+> strategic_questions <- c("ST01","ST09","ST17","ST25","ST04","ST12","ST20","ST28")
+
+4.  Selecting columns related to deep learning, surface learning and strategic learning
+- in this part with the assigning and select functions we have selected columns wanted from the 'lrn' dataset
+
+> deep_columns <- select(lrn, one_of(deep_questions))
+> lrn$deep <- rowMeans(deep_columns)
+>  surface_columns <- select(lrn, one_of(surface_questions))
+>  lrn$surf <- rowMeans(surface_columns)
+>  strategic_columns <- select(lrn, one_of(strategic_questions))
+>  lrn$stra <- rowMeans(strategic_columns)
+
+5. Combining wanted variables into one and renaming it
+- Now that the variables deep, stra and surf have been defined as wanted, they and the rest of the wanted variables are combined. Please ignore the name change at this points, this was more for myself than anything else.
+> keep_columns2 <- c( "gender", "Age", "Attitude", "deep", "stra", "surf", "Points")
+> learning2015 <- keep_columns2
+
+6. Selecting wanted columns
+- Next we selected the columns wanted in our dataset excluding the exam points variables where it is zero.
+> learning2015 <- select(lrn, one_of(keep_columns2))
+> points <- filter(learning2015, Points > "0" )
+> learning2015 <- points
+
+7. Checking the dimension of the dataset
+- This was used to see if the numbers correspond to the wanted number.
+>dim(learning2015)
+    [1] 166  7
+    
+8. Saving the data (Is there really no easier way?)
+- The write_csv function was used for this, however the only reason why I have managed to do this is thanks to another student asking about it and putting a screenshot. So I have no idea how to do this easier....
+>write_csv("/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv")
+
+9. Reading data
+> read_csv("/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv")
+    Rows: 166 Columns: 7                                                                                    
+    ── Column specification ─────────────────────────────────────────────
+    Delimiter: ","
+    chr (1): gender
+    dbl (6): Age, Attitude, deep, stra, surf, Points
+    
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    # A tibble: 166 × 7
+    gender   Age Attitude  deep  stra  surf Points
+    <chr>  <dbl>    <dbl> <dbl> <dbl> <dbl>  <dbl>
+      1 F         53       37  3.58  3.38  2.58     25
+    2 M         55       31  2.92  2.75  3.17     12
+    3 F         49       25  3.5   3.62  2.25     24
+    4 M         53       35  3.5   3.12  2.25     10
+    5 M         49       37  3.67  3.62  2.83     22
+    6 F         38       38  4.75  3.62  2.42     21
+    7 M         50       35  3.83  2.25  1.92     21
+    8 F         37       29  3.25  4     2.83     31
+    9 M         37       38  4.33  4.25  2.17     24
+    10 F         42       21  4     3.5   3        26
+    # … with 156 more rows
+    # ℹ Use `print(n = ...)` to see more rows
+    
+10. Making sure the structure is correct
+> str("/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv")
+> chr "/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv"
+> head("/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv")
+[1] "/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv"
 
