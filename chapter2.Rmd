@@ -7,7 +7,51 @@ In this section the walk through of the Exercise sheet 2 will be given.
 - Some key elements need to be relearned because this is a real struggle and half the time I have no idea where I'm going wrong or what I am doing.
 
 ```{r}
+# Read the data into R studio. Use lrn14 <- read.table("website", sep="\t", header=TRUE), use 'dim()' to look at dimension, 'str()' to look at structure
+#2.2 Scaling variables 
+#Use the '#' to write intended action then on the next row add the command with no #, eg. c(1,2,3,4,5) /2 if you want to divide each number in a vector, to create the new column with the data achieved, use lrn14$attitude <- lrn14$Attitude / 10 where 'lrn14$attitude' is the new wanted column and '<- lrn14$Attitude / 10' is the data wanted in it.
+# To assign variables to a column use 'name of column <--c("X","Y",...)'
+# to print the data: data name$column name aka lrn14$Attitude
+# 2.3 Combining variables
+# Useful commands function      | description
+# ------------- | ----------
+# `colSums(df)` | returns a sum of each column in `df`
+# `rowSums(df)` | returns a sum of each row in `df`
+# `colMeans(df)`| returns the mean of each column in `df`
+# `rowMeans(df)`| return the mean of each row in `df`
+# 2.4 Selecting columns, 
+# Assign the columns with c(), then to create a newdataset name <- select(dataset that has the info, one_of(selected columns))
+# 2.5 Modifying column names, to print out column names use 'colnames(name of dataset), to modify, just add [X] where X is the number of column and <- "Y" where Y is the new name of the column
+# 2.6 Excluding observations -> go to library dplyr, create object 'male_students' by selecting males from 'learning2014' --> this is done by 'name of wanted object' <- filter(dataset, 'what is wanted'+ assigned value <, ==, >) eg.male_students <- filter(learning2014, gender == "M"), then rows where points is greater than zero are wanted > learning2014 <- filter(male_students, points > "0")
+# 2.7 Visualization with ggplot2 
+# plots may be created via the convenience function 'gplot()'
+# Create graphics with ggplot2: start by using library ggplot2 and creating the plot, in this case p1. Add data and aesthetic mapping by p1 <- ggplot('dataset', aes(x = value, y= value))
+# To define visualization type, in here 'points' use p2 <- p1 + geom_point() <-- you can find these on the cheatsheet, also when adding something increase the number in pX. Add a regression line p3 <- p2 + geom_smooth(method = "1m"), change title by p4 <- p3 + ggtitle("title wanted here") DO NOT foRGET p3 + !!!
+# 2.8 Exploring a data frame: to visualize several plots in one scatter plot matrix: pairs(dataset), if you want to exclude something use [-X], where X is the column, in this case, gender since it doesn't have a numeric value. To adjust the visuals (remember to access ggpot2 and GGally libraries first) add the argument col = gender to the code inside of aes(), p <- ggpairs(learning2014, aes(col = gender, alpha = 0.3)), to adjust transparency of the colors add aplha = 'a value' so that the two color mappings can be seen over each other. 
+# 2.9 Simple regression, '1m()' function to fit a linear model, first argument is 'formula', this defines the target variable and the explanatory variable(s). Use formula 'y ~ x' where 'y' is the target/outcome, 'x' the explanatory variable/predictor. To print out a summary of the model, use summary()
+# 'points' vs. 'attitude' --> gplot(attitude, points, data = learning2014) + geom_smooth(method = "lm") where the function gplot() creates the plot, attitude and points are the values wanted, and the reside in the dataset 'learning2014'. To add the a linear model use '1m'. Put this into '+ geom_smooth(method = "1m") which adds a regression line.
+# fit a linear model
+# my_model <- lm(points ~ 1, data = learning2014)
+# 2.10 Multiple regression: To add more explanatory variables simple define them in the 'formula' argument of '1m()' 
+# eg. y ~ x1 + x2 ..
+# 2.11 Graphical model validation 
+# which | graphic                                 
+# ----- | --------
+# 1     | Residuals vs Fitted values 
+# 2     | Normal QQ-plot
+# 3     | Standardized residuals vs Fitted values
+# 4     | Cook's distances
+# 5     | Residuals vs Leverage 
+# 6     | Cook's distance vs Leverage 
+# library(ggplot2)
+# > my_model2 <- lm(points ~ attitude + stra, data = learning2014)
+# > par(mfrow = c(2,2))
+# > plot(my_model2, which = c(1,2,5))
+# 2.12 Making predictions, use 'predict()' see ? predict
+#  The first argument of predict is a model object and the argument `newdata` (a data.frame) can be used to make predictions based on new observations. One or more columns of `newdata` should have the same name as the explanatory variables in the model object."
 date()
 ```
 
 So I've been going trough the Exercise2 sheet and so far have learned nothing...my own fault I assume. I understand what's going on when I see the commands used but cannot duplicate the formula/function by myself with just instructions. 
+A very useful website so far: https://www.rstudio.com/resources/cheatsheets/
+
