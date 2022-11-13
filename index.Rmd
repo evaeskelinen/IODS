@@ -20,16 +20,7 @@ output:
 ```
   
 ***
-title: "Week 2"
-author: "Eva Eskelinen"
-output:
-  html_document:
-    theme: "Pink" 
-    toc: true
-    toc_depth: 2
-    fig_caption: true
-    fig_width: 6
-    fig_height: 4 
+
   
 ```{r child = "chapter2.Rmd"}
 # This will include Chapter 2 (that is updated in its own file) in the document.

@@ -1,4 +1,4 @@
-# Regression and model validation
+# Regression and model validation Week 2
 
 In this section the walk through of the Exercise sheet 2 will be given as well as the actual Assignment 2. 
 
