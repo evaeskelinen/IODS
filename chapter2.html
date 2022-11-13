@@ -409,16 +409,31 @@ I am doing.</li>
 # 2.12 Making predictions, use &#39;predict()&#39; see ? predict
 #  The first argument of predict is a model object and the argument `newdata` (a data.frame) can be used to make predictions based on new observations. One or more columns of `newdata` should have the same name as the explanatory variables in the model object.&quot;
 date()</code></pre>
-<pre><code>## [1] &quot;Sun Nov 13 16:46:28 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Sun Nov 13 17:47:00 2022&quot;</code></pre>
 <p>So I’ve been going trough the Exercise2 sheet and so far have learned
 nothing…my own fault I assume. I understand what’s going on when I see
 the commands used but cannot duplicate the formula/function by myself
 with just instructions. A very useful website so far: <a href="https://www.rstudio.com/resources/cheatsheets/" class="uri">https://www.rstudio.com/resources/cheatsheets/</a></p>
 <p>The following is the process used to do the Assignment and some
-analysis of it.</p>
+analysis of it. The analysis part 1 and 2 are included within the data
+wrangling part, part 3 to 5 separately at the bottom.</p>
 <ol style="list-style-type: decimal">
-<li>Reading the data into R Studio lrn &lt;- read.table(“<a href="https://www.mv.helsinki.fi/home/kvehkala/JYTmooc/JYTOPKYS3-data.txt" class="uri">https://www.mv.helsinki.fi/home/kvehkala/JYTmooc/JYTOPKYS3-data.txt</a>”,
-sep=“, header=TRUE)</li>
+<li>Reading the data into R Studio</li>
+</ol>
+<ul>
+<li>The data used for this Assignment is constructed from several
+variables, which at first seem to have not much sense in terms of
+naming. However with the information related to the data, it is much
+easier to understand the naming of the columns and variables. This is an
+important factor for later use of R studio in research. It is important
+to keep note of what has been assigned to what naming and make them easy
+to understand.</li>
+</ul>
+<blockquote>
+<p>lrn &lt;- read.table(“<a href="https://www.mv.helsinki.fi/home/kvehkala/JYTmooc/JYTOPKYS3-data.txt" class="uri">https://www.mv.helsinki.fi/home/kvehkala/JYTmooc/JYTOPKYS3-data.txt</a>”,
+sep=“, header=TRUE)</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
 <li>Installing possible libraries that might be used</li>
 </ol>
 <ul>
@@ -460,8 +475,8 @@ strategic learning</li>
 selected columns wanted from the ‘lrn’ dataset</li>
 </ul>
 <blockquote>
-<p>deep_columns &lt;- select(lrn, one_of(deep_questions)) lrn<span class="math inline">\(deep &lt;- rowMeans(deep_columns)  surface_columns
-&lt;- select(lrn, one_of(surface_questions))  lrn\)</span>surf &lt;-
+<p>deep_columns &lt;- select(lrn, one_of(deep_questions)) lrn<span class="math inline">\(deep &lt;- rowMeans(deep_columns) surface_columns
+&lt;- select(lrn, one_of(surface_questions)) lrn\)</span>surf &lt;-
 rowMeans(surface_columns) strategic_columns &lt;- select(lrn,
 one_of(strategic_questions)) lrn$stra &lt;-
 rowMeans(strategic_columns)</p>
@@ -473,61 +488,182 @@ rowMeans(strategic_columns)</p>
 <li>Now that the variables deep, stra and surf have been defined as
 wanted, they and the rest of the wanted variables are combined. Please
 ignore the name change at this points, this was more for myself than
-anything else. &gt; keep_columns2 &lt;- c( “gender”, “Age”, “Attitude”,
-“deep”, “stra”, “surf”, “Points”) &gt; learning2015 &lt;-
-keep_columns2</li>
+anything else.</li>
 </ul>
+<blockquote>
+<p>keep_columns2 &lt;- c( “gender”, “Age”, “Attitude”, “deep”, “stra”,
+“surf”, “Points”) learning2015 &lt;- keep_columns2</p>
+</blockquote>
 <ol start="6" style="list-style-type: decimal">
 <li>Selecting wanted columns</li>
 </ol>
 <ul>
 <li>Next we selected the columns wanted in our dataset excluding the
-exam points variables where it is zero. &gt; learning2015 &lt;-
-select(lrn, one_of(keep_columns2)) &gt; points &lt;-
-filter(learning2015, Points &gt; “0” ) &gt; learning2015 &lt;-
-points</li>
+exam points variables where it is zero.</li>
 </ul>
+<blockquote>
+<p>learning2015 &lt;- select(lrn, one_of(keep_columns2)) points &lt;-
+filter(learning2015, Points &gt; “0” ) learning2015 &lt;- points</p>
+</blockquote>
 <ol start="7" style="list-style-type: decimal">
 <li>Checking the dimension of the dataset</li>
 </ol>
 <ul>
-<li>This was used to see if the numbers correspond to the wanted number.
-&gt;dim(learning2015) [1] 166 7</li>
+<li>This was used to see if the numbers correspond to the wanted
+number.</li>
 </ul>
+<blockquote>
+<p>dim(learning2015) [1] 166 7</p>
+</blockquote>
 <ol start="8" style="list-style-type: decimal">
 <li>Saving the data (Is there really no easier way?)</li>
 </ol>
 <ul>
 <li>The write_csv function was used for this, however the only reason
 why I have managed to do this is thanks to another student asking about
-it and putting a screenshot. So I have no idea how to do this easier….
-&gt;write_csv(“/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv”)</li>
+it and putting a screenshot. So I have no idea how to do this
+easier….</li>
 </ul>
+<blockquote>
+<p>write_csv(“/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv”)</p>
+</blockquote>
 <ol start="9" style="list-style-type: decimal">
-<li><p>Reading data &gt;
-read_csv(“/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv”)
+<li>Reading data</li>
+</ol>
+<blockquote>
+<p>read_csv(“/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv”)
 Rows: 166 Columns: 7<br />
 ── Column specification ─────────────────────────────────────────────
 Delimiter: “,” chr (1): gender dbl (6): Age, Attitude, deep, stra, surf,
 Points</p>
-<p>ℹ Use <code>spec()</code> to retrieve the full column specification
-for this data. ℹ Specify the column types or set
-<code>show_col_types = FALSE</code> to quiet this message. # A tibble:
-166 × 7 gender Age Attitude deep stra surf Points <chr> <dbl> <dbl>
-<dbl> <dbl> <dbl> <dbl> 1 F 53 37 3.58 3.38 2.58 25 2 M 55 31 2.92 2.75
-3.17 12 3 F 49 25 3.5 3.62 2.25 24 4 M 53 35 3.5 3.12 2.25 10 5 M 49 37
-3.67 3.62 2.83 22 6 F 38 38 4.75 3.62 2.42 21 7 M 50 35 3.83 2.25 1.92
-21 8 F 37 29 3.25 4 2.83 31 9 M 37 38 4.33 4.25 2.17 24 10 F 42 21 4 3.5
-3 26 # … with 156 more rows # ℹ Use <code>print(n = ...)</code> to see
-more rows</p></li>
-<li><p>Making sure the structure is correct &gt;
+</blockquote>
+<pre><code>ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+# A tibble: 166 × 7
+gender   Age Attitude  deep  stra  surf Points
+&lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+  1 F         53       37  3.58  3.38  2.58     25
+2 M         55       31  2.92  2.75  3.17     12
+3 F         49       25  3.5   3.62  2.25     24
+4 M         53       35  3.5   3.12  2.25     10
+5 M         49       37  3.67  3.62  2.83     22
+6 F         38       38  4.75  3.62  2.42     21
+7 M         50       35  3.83  2.25  1.92     21
+8 F         37       29  3.25  4     2.83     31
+9 M         37       38  4.33  4.25  2.17     24
+10 F         42       21  4     3.5   3        26
+# … with 156 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>Making sure the structure is correct &gt;
 str(“/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv”)
 &gt; chr
 “/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv” &gt;
 head(“/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv”)
 [1]
-“/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv”</p></li>
+“/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv”</li>
 </ol>
+<p>Data analysis 3 to 5</p>
+<p>3-4. The three chosen variables are gender, age and attitude</p>
+<p>Starting off I have reread the data wanted followed by using the
+making point plots of all three with the point variable. &gt; qplot(Age,
+Points, data = learning2015) + geom_smooth(method = “lm”)</p>
+<p>This was followed by assigning the first regression model to m1,
+second one to m2 and third one to m3 m1 being Points ~ Age &gt; m1 &lt;-
+lm(Points ~ Age, data = learning2015)</p>
+<ul>
+<li>When it comes to points in relations to age the highest points were
+clustered for the age group of around 20 to 25 years old. &gt;
+summary(m1)</li>
+</ul>
+<p>Call: lm(formula = Points ~ Age, data = learning2015)</p>
+<p>Residuals: Min 1Q Median 3Q Max -16.0360 -3.7531 0.0958 4.6762
+10.8128</p>
+<p>Coefficients: Estimate Std. Error t value Pr(&gt;|t|)<br />
+(Intercept) 24.52150 1.57339 15.585 &lt;2e-16 *** Age -0.07074 0.05901
+-1.199 0.232<br />
+— Signif. codes: 0 ‘<em><strong>’ 0.001 ‘</strong>’ 0.01 ‘</em>’ 0.05
+‘.’ 0.1 ‘ ’ 1</p>
+<p>Residual standard error: 5.887 on 164 degrees of freedom Multiple
+R-squared: 0.008684, Adjusted R-squared: 0.00264 F-statistic: 1.437 on 1
+and 164 DF, p-value: 0.2324</p>
+<p>m2 being Points ~ gender - To analyse the plot that this has created:
+it seems like regardless of gender there’s a somewhat even division in
+points. The main difference being with slightly more lower scores with
+‘F’ as well as more even in the higher scores whereas ‘M’ has a gap at
+around 26 to 27 points.</p>
+<blockquote>
+<p>qplot(gender, Points, data = learning2015) + geom_smooth(method =
+“lm”)</p>
+</blockquote>
+<blockquote>
+<p>m2 &lt;- lm(Points ~ gender, data = learning2015)</p>
+</blockquote>
+<blockquote>
+<p>summary(m2)</p>
+</blockquote>
+<p>Call: lm(formula = Points ~ gender, data = learning2015)</p>
+<p>Residuals: Min 1Q Median 3Q Max -15.3273 -3.3273 0.5179 4.5179
+10.6727</p>
+<p>Coefficients: Estimate Std. Error t value Pr(&gt;|t|)<br />
+(Intercept) 22.3273 0.5613 39.776 &lt;2e-16 *** genderM 1.1549 0.9664
+1.195 0.234<br />
+— Signif. codes: 0 ‘<em><strong>’ 0.001 ‘</strong>’ 0.01 ‘</em>’ 0.05
+‘.’ 0.1 ‘ ’ 1</p>
+<p>Residual standard error: 5.887 on 164 degrees of freedom Multiple
+R-squared: 0.008632, Adjusted R-squared: 0.002587 F-statistic: 1.428 on
+1 and 164 DF, p-value: 0.2338</p>
+<p>m3 being Points ~ attitude</p>
+<ul>
+<li>For the last plot, points in relation to attitude it seems like
+there’s a clear rise in points when there is also a rise in the attitude
+points. &gt; qplot(Attitude, Points, data = learning2015) +
+geom_smooth(method = “lm”)</li>
+</ul>
+<blockquote>
+<p>m3 &lt;- lm(Points ~ Attitude, data = learning2015)</p>
+</blockquote>
+<blockquote>
+<p>summary(m3)</p>
+</blockquote>
+<p>Call: lm(formula = Points ~ Attitude, data = learning2015)</p>
+<p>Residuals: Min 1Q Median 3Q Max -16.9763 -3.2119 0.4339 4.1534
+10.6645</p>
+<p>Coefficients: Estimate Std. Error t value Pr(&gt;|t|)<br />
+(Intercept) 11.63715 1.83035 6.358 1.95e-09 <strong><em> Attitude
+0.35255 0.05674 6.214 4.12e-09 </em></strong> — Signif. codes: 0
+‘<em><strong>’ 0.001 ‘</strong>’ 0.01 ‘</em>’ 0.05 ‘.’ 0.1 ‘ ’ 1</p>
+<p>Residual standard error: 5.32 on 164 degrees of freedom Multiple
+R-squared: 0.1906, Adjusted R-squared: 0.1856 F-statistic: 38.61 on 1
+and 164 DF, p-value: 4.119e-09</p>
+<ol start="5" style="list-style-type: decimal">
+<li>diagnostic plots of Residual vs. Fitted values, Normal QQ-plot and
+Residual vs. Leverage</li>
+</ol>
+<p>For first plot: points ~ age</p>
+<p>For the Residual vs. Fitted values the points are much more clustered
+to the right side, and more towards the top making it lean towards
+Fitted and residual values. Normal Q-Q is almost like a straight line
+making it so that when standardized residuals increase so do theoretical
+quantiles. Residual versus leverage seems to lean much more towards
+standardised residuals being almost a straight line upwards.</p>
+<p>second plot: points ~ gender</p>
+<p>For the Residual vs. Fitted values the points are clustered to both
+side making this spesific plot somewhat useless due to such a clear
+division. Normal Q-Q is almost like a straight line making it so that
+when standardized residuals increase so do theoretical quantiles.
+Residual versus leverage seems to be the most interesting out of these
+three: there’s two straight lines upwards but one is slightly closer to
+zero point than the other one.</p>
+<p>third plot: points ~ attitude</p>
+<p>For the Residual vs. Fitted values the points are clustered to a
+rather large area covering the centerl of the plot quite well. There’s
+seems to be a center cluster. Normal Q-Q is almost like a straight line
+making it so that when standardized residuals increase so do theoretical
+quantiles. Residual versus leverage seems to be the most interesting out
+of these three: there’s a clear cluster towards the upper left corner
+towards standardized residuals but rather than circular formed more like
+a triangle.</p>
 </div>
 
 
