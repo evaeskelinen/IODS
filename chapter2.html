@@ -365,12 +365,54 @@ seems.</li>
 struggle and half the time I have no idea where I’m going wrong or what
 I am doing.</li>
 </ul>
-<pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Sat Nov 12 16:51:05 2022&quot;</code></pre>
+<pre class="r"><code># Read the data into R studio. Use lrn14 &lt;- read.table(&quot;website&quot;, sep=&quot;\t&quot;, header=TRUE), use &#39;dim()&#39; to look at dimension, &#39;str()&#39; to look at structure
+#2.2 Scaling variables 
+#Use the &#39;#&#39; to write intended action then on the next row add the command with no #, eg. c(1,2,3,4,5) /2 if you want to divide each number in a vector, to create the new column with the data achieved, use lrn14$attitude &lt;- lrn14$Attitude / 10 where &#39;lrn14$attitude&#39; is the new wanted column and &#39;&lt;- lrn14$Attitude / 10&#39; is the data wanted in it.
+# To assign variables to a column use &#39;name of column &lt;--c(&quot;X&quot;,&quot;Y&quot;,...)&#39;
+# to print the data: data name$column name aka lrn14$Attitude
+# 2.3 Combining variables
+# Useful commands function      | description
+# ------------- | ----------
+# `colSums(df)` | returns a sum of each column in `df`
+# `rowSums(df)` | returns a sum of each row in `df`
+# `colMeans(df)`| returns the mean of each column in `df`
+# `rowMeans(df)`| return the mean of each row in `df`
+# 2.4 Selecting columns, 
+# Assign the columns with c(), then to create a newdataset name &lt;- select(dataset that has the info, one_of(selected columns))
+# 2.5 Modifying column names, to print out column names use &#39;colnames(name of dataset), to modify, just add [X] where X is the number of column and &lt;- &quot;Y&quot; where Y is the new name of the column
+# 2.6 Excluding observations -&gt; go to library dplyr, create object &#39;male_students&#39; by selecting males from &#39;learning2014&#39; --&gt; this is done by &#39;name of wanted object&#39; &lt;- filter(dataset, &#39;what is wanted&#39;+ assigned value &lt;, ==, &gt;) eg.male_students &lt;- filter(learning2014, gender == &quot;M&quot;), then rows where points is greater than zero are wanted &gt; learning2014 &lt;- filter(male_students, points &gt; &quot;0&quot;)
+# 2.7 Visualization with ggplot2 
+# plots may be created via the convenience function &#39;gplot()&#39;
+# Create graphics with ggplot2: start by using library ggplot2 and creating the plot, in this case p1. Add data and aesthetic mapping by p1 &lt;- ggplot(&#39;dataset&#39;, aes(x = value, y= value))
+# To define visualization type, in here &#39;points&#39; use p2 &lt;- p1 + geom_point() &lt;-- you can find these on the cheatsheet, also when adding something increase the number in pX. Add a regression line p3 &lt;- p2 + geom_smooth(method = &quot;1m&quot;), change title by p4 &lt;- p3 + ggtitle(&quot;title wanted here&quot;) DO NOT foRGET p3 + !!!
+# 2.8 Exploring a data frame: to visualize several plots in one scatter plot matrix: pairs(dataset), if you want to exclude something use [-X], where X is the column, in this case, gender since it doesn&#39;t have a numeric value. To adjust the visuals (remember to access ggpot2 and GGally libraries first) add the argument col = gender to the code inside of aes(), p &lt;- ggpairs(learning2014, aes(col = gender, alpha = 0.3)), to adjust transparency of the colors add aplha = &#39;a value&#39; so that the two color mappings can be seen over each other. 
+# 2.9 Simple regression, &#39;1m()&#39; function to fit a linear model, first argument is &#39;formula&#39;, this defines the target variable and the explanatory variable(s). Use formula &#39;y ~ x&#39; where &#39;y&#39; is the target/outcome, &#39;x&#39; the explanatory variable/predictor. To print out a summary of the model, use summary()
+# &#39;points&#39; vs. &#39;attitude&#39; --&gt; gplot(attitude, points, data = learning2014) + geom_smooth(method = &quot;lm&quot;) where the function gplot() creates the plot, attitude and points are the values wanted, and the reside in the dataset &#39;learning2014&#39;. To add the a linear model use &#39;1m&#39;. Put this into &#39;+ geom_smooth(method = &quot;1m&quot;) which adds a regression line.
+# fit a linear model
+# my_model &lt;- lm(points ~ 1, data = learning2014)
+# 2.10 Multiple regression: To add more explanatory variables simple define them in the &#39;formula&#39; argument of &#39;1m()&#39; 
+# eg. y ~ x1 + x2 ..
+# 2.11 Graphical model validation 
+# which | graphic                                 
+# ----- | --------
+# 1     | Residuals vs Fitted values 
+# 2     | Normal QQ-plot
+# 3     | Standardized residuals vs Fitted values
+# 4     | Cook&#39;s distances
+# 5     | Residuals vs Leverage 
+# 6     | Cook&#39;s distance vs Leverage 
+# library(ggplot2)
+# &gt; my_model2 &lt;- lm(points ~ attitude + stra, data = learning2014)
+# &gt; par(mfrow = c(2,2))
+# &gt; plot(my_model2, which = c(1,2,5))
+# 2.12 Making predictions, use &#39;predict()&#39; see ? predict
+#  The first argument of predict is a model object and the argument `newdata` (a data.frame) can be used to make predictions based on new observations. One or more columns of `newdata` should have the same name as the explanatory variables in the model object.&quot;
+date()</code></pre>
+<pre><code>## [1] &quot;Sun Nov 13 15:01:43 2022&quot;</code></pre>
 <p>So I’ve been going trough the Exercise2 sheet and so far have learned
 nothing…my own fault I assume. I understand what’s going on when I see
 the commands used but cannot duplicate the formula/function by myself
-with just instructions.</p>
+with just instructions. A very useful website so far: <a href="https://www.rstudio.com/resources/cheatsheets/" class="uri">https://www.rstudio.com/resources/cheatsheets/</a></p>
 </div>
 
 

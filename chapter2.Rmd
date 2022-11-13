@@ -1,13 +1,13 @@
-# Insert chapter 2 title here
+# Regression and model validation
 
-*Describe the work you have done this week and summarize your learning.*
+In this section the walk through of the Exercise sheet 2 will be given. 
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods.
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using.
+- The work sheet has been a struggle, first to open on R Studio and then to complete the exercises. 
+- All learnt the previous week has been forgotten. Or so it seems.
+- Some key elements need to be relearned because this is a real struggle and half the time I have no idea where I'm going wrong or what I am doing.
 
 ```{r}
 date()
 ```
 
-Here we go again...
+So I've been going trough the Exercise2 sheet and so far have learned nothing...my own fault I assume. I understand what's going on when I see the commands used but cannot duplicate the formula/function by myself with just instructions. 

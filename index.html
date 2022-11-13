@@ -360,25 +360,8 @@ display: none;
 to Open Data Science - Course Project</a></li>
 <li><a href="#about-the-project" id="toc-about-the-project">About the
 project</a></li>
-<li><a href="#so-far-it-has-been-an-adventure-learning-all-this." id="toc-so-far-it-has-been-an-adventure-learning-all-this.">So far it
-has been an adventure learning all this.</a></li>
-<li><a href="#i-am-yet-to-be-sure-if-i-have-understood-clearly-everything-and-will-admit-needing-my-notes-above-to-remember-all-the-commands." id="toc-i-am-yet-to-be-sure-if-i-have-understood-clearly-everything-and-will-admit-needing-my-notes-above-to-remember-all-the-commands.">I
-am yet to be sure if I have understood clearly everything and will admit
-needing my notes (above) to remember all the commands.</a></li>
-<li><a href="#very-interesting-though.-i-expect-to-learn-how-to-use-r-and-rstudio-as-well-as-github-to-an-extent-where-it-will-be-useful-for-my-studies." id="toc-very-interesting-though.-i-expect-to-learn-how-to-use-r-and-rstudio-as-well-as-github-to-an-extent-where-it-will-be-useful-for-my-studies.">Very
-interesting though. I expect to learn how to use R and Rstudio as well
-as Github to an extent where it will be useful for my studies.</a></li>
-<li><a href="#this-course-was-one-of-the-suggested-courses-for-the-contemporary-societies-method-courses." id="toc-this-course-was-one-of-the-suggested-courses-for-the-contemporary-societies-method-courses.">This
-course was one of the suggested courses for the Contemporary Societies
-method courses.</a></li>
-<li><a href="#the-r-for-health-data-science-and-the-exercise-set-1-gave-a-good-introduction-to-the-r-tools-while-i-also-feel-like-i-will-need-much-more-work-with-r-to-fully-understand-what-i-am-doing-and-to-remember-all-the-functions-and-tools-introduced." id="toc-the-r-for-health-data-science-and-the-exercise-set-1-gave-a-good-introduction-to-the-r-tools-while-i-also-feel-like-i-will-need-much-more-work-with-r-to-fully-understand-what-i-am-doing-and-to-remember-all-the-functions-and-tools-introduced.">The
-R for Health Data Science and the Exercise Set 1 gave a good
-introduction to the R tools while I also feel like I will need much more
-work with R to fully understand what I am doing and to remember all the
-functions and tools introduced.</a></li>
-<li><a href="#httpsgithub.comevaeskelineniods-project.git" id="toc-httpsgithub.comevaeskelineniods-project.git">https://github.com/evaeskelinen/IODS-project.git</a></li>
-<li><a href="#insert-chapter-2-title-here" id="toc-insert-chapter-2-title-here">Insert chapter 2 title
-here</a></li>
+<li><a href="#regression-and-model-validation" id="toc-regression-and-model-validation">Regression and model
+validation</a></li>
 </ul>
 </div>
 
@@ -410,50 +393,42 @@ use R Markdown syntax.</em></p>
 # excluding rows: &quot;not equals&quot; (!=) to keep missing values use | operator and the is.na() function.
 # dividing columns: name of dataset$column wanted to change /2 if wanted division by 2 eg. typesdata$measurement/2
 # mutate() = incorporates the change into the column, mutate () can also be used to create a new column with a singel constant value: can be used to calculate a difference for each existing dates
-#CONTINUE FROM 2.9 CONDITIONAL CALCULATIONS
+# if_else(), paste(), 
+#joining multiple datasets
+# group summarize and mutate, pivor_wider() and pivot_longer() as well as select and arrange
 date()</code></pre>
-<pre><code>## [1] &quot;Sat Nov  5 15:55:35 2022&quot;</code></pre>
-</div>
-<div id="so-far-it-has-been-an-adventure-learning-all-this." class="section level1">
-<h1>So far it has been an adventure learning all this.</h1>
-</div>
-<div id="i-am-yet-to-be-sure-if-i-have-understood-clearly-everything-and-will-admit-needing-my-notes-above-to-remember-all-the-commands." class="section level1">
-<h1>I am yet to be sure if I have understood clearly everything and will
-admit needing my notes (above) to remember all the commands.</h1>
-</div>
-<div id="very-interesting-though.-i-expect-to-learn-how-to-use-r-and-rstudio-as-well-as-github-to-an-extent-where-it-will-be-useful-for-my-studies." class="section level1">
-<h1>Very interesting though. I expect to learn how to use R and Rstudio
-as well as Github to an extent where it will be useful for my
-studies.</h1>
-</div>
-<div id="this-course-was-one-of-the-suggested-courses-for-the-contemporary-societies-method-courses." class="section level1">
-<h1>This course was one of the suggested courses for the Contemporary
-Societies method courses.</h1>
-</div>
-<div id="the-r-for-health-data-science-and-the-exercise-set-1-gave-a-good-introduction-to-the-r-tools-while-i-also-feel-like-i-will-need-much-more-work-with-r-to-fully-understand-what-i-am-doing-and-to-remember-all-the-functions-and-tools-introduced." class="section level1">
-<h1>The R for Health Data Science and the Exercise Set 1 gave a good
-introduction to the R tools while I also feel like I will need much more
-work with R to fully understand what I am doing and to remember all the
-functions and tools introduced.</h1>
-</div>
-<div id="httpsgithub.comevaeskelineniods-project.git" class="section level1">
-<h1><a href="https://github.com/evaeskelinen/IODS-project.git" class="uri">https://github.com/evaeskelinen/IODS-project.git</a></h1>
+<pre><code>## [1] &quot;Sun Nov 13 11:23:27 2022&quot;</code></pre>
+<p>So far it has been an adventure learning all this. I am yet to be
+sure if I have understood clearly everything and will admit needing my
+notes (above) to remember all the commands. Very interesting though. I
+expect to learn how to use R and Rstudio as well as Github to an extent
+where it will be useful for my studies. This course was one of the
+suggested courses for the Contemporary Societies method courses. The R
+for Health Data Science and the Exercise Set 1 gave a good introduction
+to the R tools while I also feel like I will need much more work with R
+to fully understand what I am doing and to remember all the functions
+and tools introduced. # <a href="https://github.com/evaeskelinen/IODS-project.git" class="uri">https://github.com/evaeskelinen/IODS-project.git</a></p>
 <hr />
 </div>
-<div id="insert-chapter-2-title-here" class="section level1">
-<h1>Insert chapter 2 title here</h1>
-<p><em>Describe the work you have done this week and summarize your
-learning.</em></p>
+<div id="regression-and-model-validation" class="section level1">
+<h1>Regression and model validation</h1>
+<p>In this section the walk through of the Exercise sheet 2 will be
+given.</p>
 <ul>
-<li>Describe your work and results clearly.</li>
-<li>Assume the reader has an introductory course level understanding of
-writing and reading R code as well as statistical methods.</li>
-<li>Assume the reader has no previous knowledge of your data or the more
-advanced methods you are using.</li>
+<li>The work sheet has been a struggle, first to open on R Studio and
+then to complete the exercises.</li>
+<li>All learnt the previous week has been forgotten. Or so it
+seems.</li>
+<li>Some key elements need to be relearned because this is a real
+struggle and half the time I have no idea where I’m going wrong or what
+I am doing.</li>
 </ul>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Sat Nov  5 15:55:35 2022&quot;</code></pre>
-<p>Here we go again…</p>
+<pre><code>## [1] &quot;Sun Nov 13 11:23:28 2022&quot;</code></pre>
+<p>So I’ve been going trough the Exercise2 sheet and so far have learned
+nothing…my own fault I assume. I understand what’s going on when I see
+the commands used but cannot duplicate the formula/function by myself
+with just instructions.</p>
 <hr />
 <p>(more chapters to be added similarly as we proceed with the
 course!)</p>
