@@ -1,0 +1,254 @@
+# Regression and model validation Week 2
+
+In this section the walk through of the Exercise sheet 2 will be given as well as the actual Assignment 2. 
+
+- The work sheet has been a struggle, first to open on R Studio and then to complete the exercises. 
+- All learnt the previous week has been forgotten. Or so it seems.
+- Some key elements need to be relearned because this is a real struggle and half the time I have no idea where I'm going wrong or what I am doing.
+
+```{r}
+# You can skip this part, this is just notes on the Excercise". 
+# Read the data into R studio. Use lrn14 <- read.table("website", sep="\t", header=TRUE), use 'dim()' to look at dimension, 'str()' to look at structure
+#2.2 Scaling variables 
+#Use the '#' to write intended action then on the next row add the command with no #, eg. c(1,2,3,4,5) /2 if you want to divide each number in a vector, to create the new column with the data achieved, use lrn14$attitude <- lrn14$Attitude / 10 where 'lrn14$attitude' is the new wanted column and '<- lrn14$Attitude / 10' is the data wanted in it.
+# To assign variables to a column use 'name of column <--c("X","Y",...)'
+# to print the data: data name$column name aka lrn14$Attitude
+# 2.3 Combining variables
+# Useful commands function      | description
+# ------------- | ----------
+# `colSums(df)` | returns a sum of each column in `df`
+# `rowSums(df)` | returns a sum of each row in `df`
+# `colMeans(df)`| returns the mean of each column in `df`
+# `rowMeans(df)`| return the mean of each row in `df`
+# 2.4 Selecting columns, 
+# Assign the columns with c(), then to create a newdataset name <- select(dataset that has the info, one_of(selected columns))
+# 2.5 Modifying column names, to print out column names use 'colnames(name of dataset), to modify, just add [X] where X is the number of column and <- "Y" where Y is the new name of the column
+# 2.6 Excluding observations -> go to library dplyr, create object 'male_students' by selecting males from 'learning2014' --> this is done by 'name of wanted object' <- filter(dataset, 'what is wanted'+ assigned value <, ==, >) eg.male_students <- filter(learning2014, gender == "M"), then rows where points is greater than zero are wanted > learning2014 <- filter(male_students, points > "0")
+# 2.7 Visualization with ggplot2 
+# plots may be created via the convenience function 'gplot()'
+# Create graphics with ggplot2: start by using library ggplot2 and creating the plot, in this case p1. Add data and aesthetic mapping by p1 <- ggplot('dataset', aes(x = value, y= value))
+# To define visualization type, in here 'points' use p2 <- p1 + geom_point() <-- you can find these on the cheatsheet, also when adding something increase the number in pX. Add a regression line p3 <- p2 + geom_smooth(method = "1m"), change title by p4 <- p3 + ggtitle("title wanted here") DO NOT foRGET p3 + !!!
+# 2.8 Exploring a data frame: to visualize several plots in one scatter plot matrix: pairs(dataset), if you want to exclude something use [-X], where X is the column, in this case, gender since it doesn't have a numeric value. To adjust the visuals (remember to access ggpot2 and GGally libraries first) add the argument col = gender to the code inside of aes(), p <- ggpairs(learning2014, aes(col = gender, alpha = 0.3)), to adjust transparency of the colors add aplha = 'a value' so that the two color mappings can be seen over each other. 
+# 2.9 Simple regression, '1m()' function to fit a linear model, first argument is 'formula', this defines the target variable and the explanatory variable(s). Use formula 'y ~ x' where 'y' is the target/outcome, 'x' the explanatory variable/predictor. To print out a summary of the model, use summary()
+# 'points' vs. 'attitude' --> gplot(attitude, points, data = learning2014) + geom_smooth(method = "lm") where the function gplot() creates the plot, attitude and points are the values wanted, and the reside in the dataset 'learning2014'. To add the a linear model use '1m'. Put this into '+ geom_smooth(method = "1m") which adds a regression line.
+# fit a linear model
+# my_model <- lm(points ~ 1, data = learning2014)
+# 2.10 Multiple regression: To add more explanatory variables simple define them in the 'formula' argument of '1m()' 
+# eg. y ~ x1 + x2 ..
+# 2.11 Graphical model validation 
+# which | graphic                                 
+# ----- | --------
+# 1     | Residuals vs Fitted values 
+# 2     | Normal QQ-plot
+# 3     | Standardized residuals vs Fitted values
+# 4     | Cook's distances
+# 5     | Residuals vs Leverage 
+# 6     | Cook's distance vs Leverage 
+# library(ggplot2)
+# > my_model2 <- lm(points ~ attitude + stra, data = learning2014)
+# > par(mfrow = c(2,2))
+# > plot(my_model2, which = c(1,2,5))
+# 2.12 Making predictions, use 'predict()' see ? predict
+#  The first argument of predict is a model object and the argument `newdata` (a data.frame) can be used to make predictions based on new observations. One or more columns of `newdata` should have the same name as the explanatory variables in the model object."
+date()
+```
+
+So I've been going trough the Exercise2 sheet and so far have learned nothing...my own fault I assume. I understand what's going on when I see the commands used but cannot duplicate the formula/function by myself with just instructions. 
+A very useful website so far: https://www.rstudio.com/resources/cheatsheets/
+
+The following is the process used to do the Assignment and some analysis of it. The analysis part 1 and 2 are included within the data wrangling part, part 3 to 5 separately at the bottom.
+
+1. Reading the data into R Studio
+- The data used for this Assignment is constructed from several variables, which at first seem to have not much sense in terms of naming. However with the information related to the data, it is much easier to understand the naming of the columns and variables. This is an important factor for later use of R studio in research. It is important to keep note of what has been assigned to what naming and make them easy to understand.
+
+> lrn <- read.table("https://www.mv.helsinki.fi/home/kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
+
+
+2. Installing possible libraries that might be used
+- As I wasn't sure which ones would be necessary, all 4 were recalled from the library for use. Out of these mainly dplyrt and tidyverse were used.
+
+> library(GGally)
+> library(ggplot2)
+> library(dplyr)
+> library(tidyverse)
+
+3. Combining questions of the data: Deep, surface and strategic questions
+- For this section the data was cleaned up for later use. Data relater to deep questions were combined to be found under the label 'deep_questions' and the same process was done for surface and strategic questions with the function shown below. 'deep_questions was to be the assigned name for the combination of variables selected done by the <- assign function followed by the c() function including the selected columns.
+
+> deep_questions <- c("D03", "D11", "D19", "D27", "D07", "D14", "D22", "D30","D06",  "D15", "D23", "D31")
+> surface_questions <- c("SU02","SU10","SU18","SU26", "SU05","SU13","SU21","SU29","SU08","SU16","SU24","SU32")
+> strategic_questions <- c("ST01","ST09","ST17","ST25","ST04","ST12","ST20","ST28")
+
+4.  Selecting columns related to deep learning, surface learning and strategic learning
+- in this part with the assigning and select functions we have selected columns wanted from the 'lrn' dataset
+
+> deep_columns <- select(lrn, one_of(deep_questions)) 
+> lrn$deep <- rowMeans(deep_columns)
+> surface_columns <- select(lrn, one_of(surface_questions))
+> lrn$surf <- rowMeans(surface_columns)
+> strategic_columns <- select(lrn, one_of(strategic_questions))
+> lrn$stra <- rowMeans(strategic_columns)
+
+5. Combining wanted variables into one and renaming it
+- Now that the variables deep, stra and surf have been defined as wanted, they and the rest of the wanted variables are combined. Please ignore the name change at this points, this was more for myself than anything else.
+
+> keep_columns2 <- c( "gender", "Age", "Attitude", "deep", "stra", "surf", "Points")
+> learning2015 <- keep_columns2
+
+6. Selecting wanted columns
+- Next we selected the columns wanted in our dataset excluding the exam points variables where it is zero.
+
+> learning2015 <- select(lrn, one_of(keep_columns2))
+> points <- filter(learning2015, Points > "0" )
+> learning2015 <- points
+
+7. Checking the dimension of the dataset
+- This was used to see if the numbers correspond to the wanted number.
+
+> dim(learning2015)
+    [1] 166  7
+    
+8. Saving the data (Is there really no easier way?)
+- The write_csv function was used for this, however the only reason why I have managed to do this is thanks to another student asking about it and putting a screenshot. So I have no idea how to do this easier....
+
+> write_csv("/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv")
+
+9. Reading data
+
+> read_csv("/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv")
+    Rows: 166 Columns: 7                                                                                    
+    ── Column specification ─────────────────────────────────────────────
+    Delimiter: ","
+    chr (1): gender
+    dbl (6): Age, Attitude, deep, stra, surf, Points
+    
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    # A tibble: 166 × 7
+    gender   Age Attitude  deep  stra  surf Points
+    <chr>  <dbl>    <dbl> <dbl> <dbl> <dbl>  <dbl>
+      1 F         53       37  3.58  3.38  2.58     25
+    2 M         55       31  2.92  2.75  3.17     12
+    3 F         49       25  3.5   3.62  2.25     24
+    4 M         53       35  3.5   3.12  2.25     10
+    5 M         49       37  3.67  3.62  2.83     22
+    6 F         38       38  4.75  3.62  2.42     21
+    7 M         50       35  3.83  2.25  1.92     21
+    8 F         37       29  3.25  4     2.83     31
+    9 M         37       38  4.33  4.25  2.17     24
+    10 F         42       21  4     3.5   3        26
+    # … with 156 more rows
+    # ℹ Use `print(n = ...)` to see more rows
+    
+10. Making sure the structure is correct
+> str("/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv")
+> chr "/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv"
+> head("/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv")
+[1] "/Users/evaeskelinen/Documents/GitHub/IODS/data/learning2015.csv"
+
+Data analysis 3 to 5
+
+3-4. The three chosen variables are gender, age and attitude
+
+Starting off I have reread the data wanted followed by using the making point plots of all three with the point variable.
+> qplot(Age, Points, data = learning2015) + geom_smooth(method = "lm")
+
+This was followed by assigning the first regression model to m1, second one to m2 and third one to m3
+m1 being Points ~ Age
+> m1 <- lm(Points ~ Age, data = learning2015)
+
+- When it comes to points in relations to age the highest points were clustered for the age group of around 20 to 25 years old. 
+> summary(m1)
+
+Call:
+lm(formula = Points ~ Age, data = learning2015)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-16.0360  -3.7531   0.0958   4.6762  10.8128 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 24.52150    1.57339  15.585   <2e-16 ***
+Age         -0.07074    0.05901  -1.199    0.232    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.887 on 164 degrees of freedom
+Multiple R-squared:  0.008684,	Adjusted R-squared:  0.00264 
+F-statistic: 1.437 on 1 and 164 DF,  p-value: 0.2324
+
+
+
+
+m2 being Points ~ gender
+- To analyse the plot that this has created: it seems like regardless of gender there's a somewhat even division in points. The main difference being with slightly more lower scores with 'F' as well as more even in the higher scores whereas 'M' has a gap at around 26 to 27 points.
+
+> qplot(gender, Points, data = learning2015) + geom_smooth(method = "lm")
+
+> m2 <- lm(Points ~ gender, data = learning2015)
+
+> summary(m2)
+
+Call:
+lm(formula = Points ~ gender, data = learning2015)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-15.3273  -3.3273   0.5179   4.5179  10.6727 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  22.3273     0.5613  39.776   <2e-16 ***
+genderM       1.1549     0.9664   1.195    0.234    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.887 on 164 degrees of freedom
+Multiple R-squared:  0.008632,	Adjusted R-squared:  0.002587 
+F-statistic: 1.428 on 1 and 164 DF,  p-value: 0.2338
+
+m3 being Points ~ attitude
+
+- For the last plot, points in relation to attitude it seems like there's a clear rise in points when there is also a rise in the attitude points.
+> qplot(Attitude, Points, data = learning2015) + geom_smooth(method = "lm")
+
+> m3 <- lm(Points ~ Attitude, data = learning2015)
+
+> summary(m3)
+
+Call:
+lm(formula = Points ~ Attitude, data = learning2015)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-16.9763  -3.2119   0.4339   4.1534  10.6645 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 11.63715    1.83035   6.358 1.95e-09 ***
+Attitude     0.35255    0.05674   6.214 4.12e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.32 on 164 degrees of freedom
+Multiple R-squared:  0.1906,	Adjusted R-squared:  0.1856 
+F-statistic: 38.61 on 1 and 164 DF,  p-value: 4.119e-09
+
+
+5. diagnostic plots of Residual vs. Fitted values, Normal QQ-plot and Residual vs. Leverage
+
+For first plot: points ~ age
+
+For the Residual vs. Fitted values the points are much more clustered to the right side, and more towards the top making it lean towards Fitted and residual values.
+Normal Q-Q is almost like a straight line making it so that when standardized residuals increase so do theoretical quantiles. Residual versus leverage seems to lean much more towards standardised residuals being almost a straight line upwards.
+
+second plot: points ~ gender
+
+For the Residual vs. Fitted values the points are clustered to both side making this spesific plot somewhat useless due to such a clear division.
+Normal Q-Q is almost like a straight line making it so that when standardized residuals increase so do theoretical quantiles. Residual versus leverage seems to be the most interesting out of these three: there's two straight lines upwards but one is slightly closer to zero point than the other one.
+
+third plot: points ~ attitude
+
+For the Residual vs. Fitted values the points are clustered to a rather large area covering the centerl of the plot quite well. There's seems to be a center cluster.
+Normal Q-Q is almost like a straight line making it so that when standardized residuals increase so do theoretical quantiles. Residual versus leverage seems to be the most interesting out of these three: there's a clear cluster towards the upper left corner towards standardized residuals but rather than circular formed more like a triangle.
